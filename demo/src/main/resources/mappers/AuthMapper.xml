@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.AuthMapper">
+
+  <select id="list" resultType="com.example.demo.model.pojo.User_my">
+    SELECT * FROM users
+  </select>
+
+  <!-- getUserByEmail --> 
+  <select id="getUserByEmail" parameterType="string" >
+    SELECT * FROM users WHERE email = #{email}
+  </select>
+  
+  <!--  getUserByPhone --> 
+  <select id="getUserByPhone">
+    SELECT * FROM users WHERE phone = #{phone}
+  </select>
+
+
+  <!-- createUser --> 
+  <insert id="createUser" parameterType="com.example.demo.model.pojo.User_my">
+    INSERT INTO users(user_name, email, phone, password)
+    VALUES(#{userName}, #{email}, #{phone}, #{password})
+  </insert>
+
+  <!-- getAllUsers --> 
+
+  <select id="getAllUsers" resultType="com.example.demo.model.pojo.User_my">
+    SELECT * FROM users
+    ORDER BY user_id
+    LIMIT #{size} OFFSET #{offset}
+  </select>
+
+ </mapper>

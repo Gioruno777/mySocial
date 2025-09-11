@@ -1,0 +1,39 @@
+services:
+  # frontend:
+  #   image: node:22
+  #   container_name: socialMedia-frontend
+  #   working_dir: /app
+  #   volumes:
+  #     - ./frontend:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - "5173:5173"
+  #   # env_file:
+  #   #   - ./frontend/.env
+  #   networks:
+  #     - app-network
+  #   stdin_open: true
+  #   tty: true
+
+  mysql:
+    image: mysql:8
+    container_name: socialMedia-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: social_media
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./DB:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+
+volumes:
+  mysql-data:
+
+networks:
+  app-network:
