@@ -4,19 +4,30 @@
 
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
-    <!-- getUserById --> 
 
-    <select id="getUserById">
+  <!--  getUserByEmail --> 
+  <select id="getUserByEmail" parameterType="string" >
+    SELECT * FROM users WHERE email = #{email}
+  </select>
+    
+  <!--  getUserByPhone --> 
+  <select id="getUserByPhone">
+    SELECT * FROM users WHERE phone = #{phone}
+  </select>
+
+
+  <!-- getUserById --> 
+  <select id="getUserById">
     SELECT user_name FROM users WHERE user_id=#{userId}
-    </select>
+  </select>
 
-    <!-- updateUserName --> 
+  <!-- updateUserName --> 
 
-    <update id="updateUserName" parameterType="com.example.demo.model.pojo.User_my">
-        UPDATE users
-        SET user_name = #{userName}
-        WHERE user_id = #{userId}
-    </update>
+  <update id="updateUserName" parameterType="com.example.demo.model.pojo.User_my">
+      UPDATE users
+      SET user_name = #{userName}
+      WHERE user_id = #{userId}
+  </update>
 
   <!-- deleteUser --> 
 
@@ -24,4 +35,10 @@
       DELETE FROM users WHERE user_id = #{userId}
     </delete>
 
+  <!-- insertUser --> 
+
+  <insert id="insertUser" parameterType="com.example.demo.model.pojo.User_my">
+    INSERT INTO users(user_name, email, phone, password)
+    VALUES(#{userName}, #{email}, #{phone}, #{password})
+  </insert>
   </mapper>
