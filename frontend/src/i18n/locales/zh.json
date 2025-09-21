@@ -1,0 +1,9 @@
+{
+  "title":"標頭",
+  "userName": "使用者名稱",
+  "password": "密碼",
+  "email": "信箱",
+  "phone": "行動電話",
+  "birth":"生日",
+  "sex": "性別"
+}
