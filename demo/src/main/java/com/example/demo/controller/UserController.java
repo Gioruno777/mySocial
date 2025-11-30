@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.InsertUserRequestDTO;
+import com.example.demo.dto.Rgmif13QueryReponseDTO;
+import com.example.demo.dto.Rgmif13QueryRequestDTO;
 import com.example.demo.dto.UpdateUserNameRequestDTO;
 import com.example.demo.service.UserService;
+import com.github.pagehelper.PageInfo;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +35,13 @@ public class UserController {
     private Long getUserId() {
         return Long.valueOf(SecurityContextHolder.getContext().getAuthentication().getName());
     }
+    
+    @PostMapping("/list")
+    public ResponseEntity<PageInfo<Rgmif13QueryReponseDTO>> listUser(@RequestBody Rgmif13QueryRequestDTO req ){
+        log.info("UserRequest,page={}", req);
+        return ResponseEntity.ok(userService.listUser(req));
+    };
+
 
     @PostMapping
     public ResponseEntity<Map<String, String>> createUser(@Validated @RequestBody InsertUserRequestDTO req) {

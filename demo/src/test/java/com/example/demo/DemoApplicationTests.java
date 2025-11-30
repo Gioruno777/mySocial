@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.demo.mapper.AuthMapper;
+import com.example.demo.dao.AuthMapper;
 import com.example.demo.model.pojo.User_my;
 
 @SpringBootTest

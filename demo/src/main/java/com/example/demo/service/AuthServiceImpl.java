@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.dao.AuthMapper;
 import com.example.demo.dto.LoginRequest;
 import com.example.demo.dto.SignUpRequest;
-import com.example.demo.mapper.AuthMapper;
 import com.example.demo.model.pojo.User_my;
 import com.example.demo.utils.JwtUtil;
 

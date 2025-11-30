@@ -1,18 +1,24 @@
-package com.example.demo.mapper;
+package com.example.demo.dao;
+
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.example.demo.dto.Rgmif13ConditionsDTO;
+import com.example.demo.model.pojo.User;
 import com.example.demo.model.pojo.User_my;
 
 @Mapper
 public interface UserMapper {
 
-    public User_my getUserByEmail(String email);
+    Boolean existsByEmail(String email);
 
-    public User_my getUserByPhone(String phone);
+    Boolean existsByPhone(String phone);
 
     public User_my getUserById(@Param("userId") Long userId);
+
+    List<User> listUsers(Rgmif13ConditionsDTO conditions);
 
     public int insertUser(User_my user);
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.demo.mapper.AuthMapper">
+<mapper namespace="com.example.demo.dao.AuthMapper">
 
   <select id="list" resultType="com.example.demo.model.pojo.User_my">
     SELECT * FROM users

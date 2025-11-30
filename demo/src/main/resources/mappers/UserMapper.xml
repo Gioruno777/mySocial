@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.demo.mapper.UserMapper">
+<mapper namespace="com.example.demo.dao.UserMapper">
 
 
   <!--  getUserByEmail --> 
@@ -41,4 +41,38 @@
     INSERT INTO users(user_name, email, phone, password)
     VALUES(#{userName}, #{email}, #{phone}, #{password})
   </insert>
+
+  <!-- existsByEmail --> 
+
+  <select id="existsByEmail" parameterType="string" resultType="boolean">
+    SELECT EXISTS(SELECT 1 FROM users WHERE email = #{email})
+  </select>
+
+  <!-- existsByPhone --> 
+
+  <select id="existsByPhone" parameterType="string" resultType="boolean">
+    SELECT EXISTS(SELECT 1 FROM users WHERE phone = #{phone})
+  </select>  
+
+  <!-- listUsers --> 
+
+  <select id="listUsers"
+          parameterType="com.example.demo.dto.Rgmif13ConditionsDTO" 
+          resultType="com.example.demo.model.pojo.User">
+    SELECT
+            *
+    FROM users
+    <where>
+        <if test="email != null and email != ''">
+            email = #{email}
+        </if>
+        <if test="userName != null and userName != ''">
+            AND user_name LIKE CONCAT('%', #{userName}, '%')
+        </if>
+        <if test="phone != null and phone != ''">
+            AND phone LIKE CONCAT('%', #{phone}, '%')
+        </if>
+    </where>
+  </select>  
+
   </mapper>
