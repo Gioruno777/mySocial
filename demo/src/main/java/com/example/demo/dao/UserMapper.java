@@ -20,7 +20,7 @@ public interface UserMapper {
 
     List<User> listUsers(Rgmif13ConditionsDTO conditions);
 
-    public int insertUser(User_my user);
+    public int insertUser(User user);
 
     public void updateUserName(@Param("userId") Long userId, @Param("userName") String userName);
 

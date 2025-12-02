@@ -50,4 +50,14 @@ public class GlobalExceptionHandler {
         error.put("message", ex.getMessage());
         return ResponseEntity.badRequest().body(error);
     }
+
+    @ExceptionHandler(InsertFailedException.class)
+    public ResponseEntity<Map<String, String>> InsertFailedException(
+           InsertFailedException ex) {
+        log.warn("NotFoundError{}", ex.getMessage());
+        Map<String, String> error = new HashMap<>();
+        error.put("success", "false");
+        error.put("message", ex.getMessage());
+        return ResponseEntity.badRequest().body(error);
+    }
 }

@@ -37,7 +37,7 @@
 
   <!-- insertUser --> 
 
-  <insert id="insertUser" parameterType="com.example.demo.model.pojo.User_my">
+  <insert id="insertUser" parameterType="com.example.demo.model.pojo.User">
     INSERT INTO users(user_name, email, phone, password)
     VALUES(#{userName}, #{email}, #{phone}, #{password})
   </insert>

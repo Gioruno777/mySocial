@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.InsertUserRequestDTO;
+import com.example.demo.dto.Rgmif13CreateRequestDTO;
 import com.example.demo.dto.Rgmif13QueryReponseDTO;
 import com.example.demo.dto.Rgmif13QueryRequestDTO;
 import com.example.demo.dto.UpdateUserNameRequestDTO;
@@ -44,7 +44,7 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<Map<String, String>> createUser(@Validated @RequestBody InsertUserRequestDTO req) {
+    public ResponseEntity<Map<String, String>> createUser(@Validated @RequestBody Rgmif13CreateRequestDTO  req) {
         log.info("UserRequest={}", req);
         userService.createUser(req);
         Map<String, String> response = new HashMap<>();
