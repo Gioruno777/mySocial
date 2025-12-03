@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.UserMapperV2">
+    
+    <!-- listUsers --> 
+
+  <select id="listUsers"
+          parameterType="com.example.demo.dto.Rgmif13ConditionsDTO" 
+          resultType="com.example.demo.model.pojo.User">
+    SELECT
+            *
+    FROM users
+    <where>
+        <if test="email != null and email != ''">
+            email = #{email}
+        </if>
+        <if test="userName != null and userName != ''">
+            AND user_name LIKE CONCAT('%', #{userName}, '%')
+        </if>
+        <if test="phone != null and phone != ''">
+            AND phone LIKE CONCAT('%', #{phone}, '%')
+        </if>
+    </where>
+  </select>  
+
+    <!-- insertUser --> 
+
+  <insert id="insertUser" parameterType="com.example.demo.model.pojo.User">
+    INSERT INTO users(user_name, email, phone, password)
+    VALUES(#{userName}, #{email}, #{phone}, #{password})
+  </insert>
+    <!-- findByUserId --> 
+
+    <select id="findByUserId"  parameterType="long">
+        SELECT * FROM users WHERE user_id = #{userId}
+    </select>    
+    
+
+    <!-- findByphone --> 
+
+    <select id="findByPhone">
+        SELECT * FROM users WHERE phone = #{phone}
+    </select>    
+
+    <!-- updateUser --> 
+
+    <update id="updateUser" parameterType="com.example.demo.model.pojo.User">
+        UPDATE users
+        SET 
+            user_name = #{userName}
+        WHERE user_id = #{userId}
+    </update>    
+
+    <!-- deleteUser --> 
+
+    <delete id="deleteUser" parameterType="long">
+        DELETE FROM users WHERE user_id = #{userId}
+    </delete>
+</mapper>

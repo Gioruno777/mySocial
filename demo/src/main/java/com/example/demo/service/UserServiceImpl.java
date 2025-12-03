@@ -6,6 +6,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.convert.Rgmif13Convert;
 import com.example.demo.dao.UserMapper;
 import com.example.demo.dto.PaginationDTO;
 import com.example.demo.dto.Rgmif13ConditionsDTO;
@@ -16,7 +17,6 @@ import com.example.demo.dto.UpdateUserNameRequestDTO;
 import com.example.demo.exception.ConflictErrorException;
 import com.example.demo.exception.InsertFailedException;
 import com.example.demo.exception.NotFoundErrorException;
-import com.example.demo.mapper.Rgmif13Mapper;
 import com.example.demo.model.pojo.User;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.PageHelper;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         PaginationDTO page = req.getPagination();
         PageHelper.startPage(page.getCurrent_page(), page.getPage_size());
         List<User> list = userMapper.listUsers(conditions);
-        List<Rgmif13QueryReponseDTO> dtoList = list.stream().map(Rgmif13Mapper::toDTO).toList();   
+        List<Rgmif13QueryReponseDTO> dtoList = list.stream().map(Rgmif13Convert::toDTO).toList();   
         return new PageInfo<>(dtoList);
     }
     
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         if (userMapper.existsByPhone(req.getPhone())){
             throw new ConflictErrorException("Phone已被使用!!!!");
         }
-        User entity = Rgmif13Mapper.toEntity(req);
+        User entity = Rgmif13Convert.toEntityForCreate(req);
         log.info("toEntity",entity);
         try{
             int rows = userMapper.insertUser(entity);
