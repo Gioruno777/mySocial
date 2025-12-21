@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/userV2")
 @Slf4j
 public class UserV2Controller {
+    
     @Autowired
     private UserServiceV2 userServiceV2;
 
@@ -42,6 +43,7 @@ public class UserV2Controller {
         log.info("UserRequest,page={}", req);
         return ResponseEntity.ok(userServiceV2.listUser(req));
     };
+
     @GetMapping("/{userId}")
     public ResponseEntity<?> getUserDetail(@PathVariable Long userId){
         try{
